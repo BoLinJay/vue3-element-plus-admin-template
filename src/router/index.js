@@ -1,3 +1,4 @@
+import { getCookie } from '@/utils/token'
 import { createRouter, createWebHistory} from 'vue-router'
 const routes = [
     {
@@ -8,19 +9,21 @@ const routes = [
     },
     {
         path: '/',
+        name: '首页',
         redirect: '/login',
         hidden: true,
         component: ()=>import('@/components/login.vue')
     },
     {
         path: '/login',
-        name: 'Login',
+        name: '登录',
         hidden: true,
         component: () => import('@/components/login.vue')
     },
     {
         path: '/home',
         name: '学生管理',
+        redirect: '/home/student',
         component: () => import('@/views/home'),
         children: [
             {
@@ -86,7 +89,7 @@ const routes = [
         children: [
             {
                 path: '/home/user',
-                name: '用户信息',
+                name: '权限管理',
                 component: () => import('@/views/user/User.vue')
             }
         ]
@@ -99,5 +102,11 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
 })
-
+router.beforeEach(( to, from, next) => {
+    if(to.path === '/login' || to.path === '/') {
+        next()
+    } else if(!getCookie('tokenKey')) {
+        next('/login')
+    } else next()
+})
 export default router

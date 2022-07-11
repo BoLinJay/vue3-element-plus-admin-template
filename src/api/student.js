@@ -39,3 +39,13 @@ export const Info = (type,form) => {
 export const getWorksList = (page, size) => {
     return www(`/works?page=${page}&size=${size}`, 'get')
 }
+
+// 数据概览
+export const getDataviewList = () => {
+    return www('/dataview', 'get')
+}
+
+// 旅游地图
+export const getTravelMapList = () => {
+    return www('/travel', 'get')
+}

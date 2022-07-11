@@ -47,9 +47,9 @@ const login = (formEL) => {
     if(!formEL) return 
     formEL.validate((valid) => {
         if(valid) {
-           userLogin(form).then( ({ data }) => {
+           userLogin(form).then( ( data ) => {
                 console.log(data); 
-                setCookie('token', data.token)  
+                setCookie('tokenKey', data.token)  
                 router.push('/home')
            })
         } else {

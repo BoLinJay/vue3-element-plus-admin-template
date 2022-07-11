@@ -5,9 +5,13 @@ const { ElementPlusResolver } = require('unplugin-vue-components/resolvers')
 
 module.exports = defineConfig({
   devServer:{
+    open: true,
+    host: '127.0.0.1',
+    port: 8080,
     proxy: {
       '/api': {
         target: 'http://1.116.64.64:5004/api2',
+        pathRewrite: { '^/api': '' },
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
