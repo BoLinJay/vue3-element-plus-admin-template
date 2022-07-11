@@ -24,6 +24,7 @@ import { useRoute, useRouter } from 'vue-router'
 const menu = ref([])
 const router = useRouter()
 menu.value = [...router.options.routes]
+console.log(router.options.routes);
 </script>
 
 <style lang="scss" scoped>
